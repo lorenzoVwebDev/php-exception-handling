@@ -5,12 +5,92 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Exception Handling</title>
   <link rel="stylesheet" href="./style/style.css"/>
+  <script>
+    async function fetcher(formData) {
+      try {
+        const response = await fetch('http://errorlogs/exceptions/division_response.php', {
+        method: 'POST',
+        body: formData
+      });
+      if (response.status >= 200 && response.status < 400) {
+        const result = await response.json();
+        const finalResponse = {...result, status: response.status};
+        return finalResponse; 
+      } else if (response.status >= 400 && response.status < 500 ){
+        const error = await response.json();
+        console.error('message', 'bad request');
+        return error;
+      } else {
+        const error = await response.json();
+        console.error('message', 'server error');
+        return error;
+      }
+;
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  </script>
 </head>
 <body>
   <section class="git-header-section">
   </section>
+  <section class="form-section">
+    <div class="form-container">
+        <form method="post" class="divide-form" id="divide-form">
+        Divide By zero
+        <input type="number" min="0" max="1000" name="high-number" id="high-number" required/>
+        /
+        <input type="number" min="0" max="1000" name="low-number" id="low-number" required/>
+        <input type="submit" value="Click to Divide"/>
+      </form>
+    </div>
+    <div class="result-container"></div>
+    <div class="error-container">
+    </div>
+  </section>
   <section class="footer-section">
   </section>
+  <script type="module"> 
+    import "https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js";
+    document.querySelector('.divide-form').addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const form = event.target;
+      const formData = new FormData(form);
+      const response = await fetcher(formData);
+      try {
+        if (response.status >= 200 && response.status < 400) {
+          document.querySelector('.result-container').innerHTML = `
+            <h4 class="good-h4">${response.result}</h4>
+          `
+        } else if (response.status >= 400 && response.status < 500) {
+          console.log(response.status);
+          document.querySelector('.result-container').innerHTML = '';
+          document.querySelector('.error-container').innerHTML = `
+            <h4 class="bad-h4">
+              ${response.message}
+            <button class="error-h4-button">Download Exceptions' Log File</button>  
+            </h4>
+          `;
+          
+          document.querySelector('.error-h4-button').addEventListener('click', async () => {
+            const blob = await fetch('http://errorlogs/exceptions/division_response.php').then(response => response.blob());
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${dayjs().format('DDMMYY')}error_logs.log`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+          })
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }); 
+
+  </script>
   <script src="./common/index.js" type="module"></script>
 </body>
 </html>

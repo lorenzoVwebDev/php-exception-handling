@@ -1,14 +1,14 @@
 <?php
-class test_error {
-  function produce_error() {
-    trigger_error("This is the error message", E_USER_WARNING);
-/*     exit(); */
-/*     echo "This is not going to be printed"; */
+class throw_error {
+  public $number;
+
+  function __construct($low_number) {
+    $this->number = $low_number;
   }
 
   function throw_exception() {
-    throw new userException("User Exception");
-    echo "This line will not display";
+    $message = "divided by " . $this->number;
+    throw new Exception($message);
   }
 }
 ?>

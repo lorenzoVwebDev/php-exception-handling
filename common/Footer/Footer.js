@@ -61,7 +61,7 @@ const Footer = `<footer class="footer-container">
               Abstract
             </h6>
             <p>
-              A Project that involves the usage of the redux-library in React. Very useful to manage both states and states' reducers.
+              ⚠️ Project In Development
             </p>
           </div>
           <div class="main-footer-section-central-left">
@@ -69,18 +69,12 @@ const Footer = `<footer class="footer-container">
               Libraries/Frameworks
             </h6>
             <p>
-              <a href="https://react.dev/">React</a>
-            </p>
-            <p>
-              <a href="https://redux.dev/">Redux</a>
-            </p>
-            <p>
               <a href="https://sass-lang.com/">Sass</a>
             </p>
           </div>
           <div class="main-footer-section-central-right">
             <h6>
-              Other React Repositories
+              Other Repositories
             </h6>
             <p>
               <a href="https://github.com/lorenzoVwebDev/loginPage">Login Page</a>

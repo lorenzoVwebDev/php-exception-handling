@@ -1,4 +1,4 @@
-# [PHP Exception Handling](https://www.lorenzo-viganego.com/#portfolio)
+# [PHP Exceptions Handling](https://www.lorenzo-viganego.com/#portfolio)
  ⚠️ Project In Development!
 ![Features](https://img.shields.io/badge/Features-My%20frontend's%20features-green)
 
