@@ -3,12 +3,12 @@
   require_once('./test_error.php');
   use exception_log\class\Exception_log;
 
-  function error_handler($errno, $errstr, $errfile, $errline) {
+/*   function error_handler($errno, $errstr, $errfile, $errline) {
     print "exception thrown";
     throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
   }
 
-  set_error_handler('error_handler');
+  set_error_handler('error_handler'); */
 
   try {
   if (isset($_POST['high-number']) && isset($_POST['low-number'])) {
