@@ -1,5 +1,4 @@
 <?php
-  declare(strict_types=1);
   require_once('./exception_log.php');
   require_once('./test_error.php');
   use exception_log\class\Exception_log;
