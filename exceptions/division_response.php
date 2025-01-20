@@ -5,7 +5,7 @@
 
   function error_handler($errno, $errstr, $errfile, $errline) {
     print "exception thrown";
-    throw new errorException($errstr, 0, $errno, $errfile, $errline);
+    throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
   }
 
   set_error_handler('error_handler');
@@ -37,7 +37,7 @@
     print 'not received';
     print_r($_POST);
   }
-} catch (errorException $ex) {
+} catch (ErrorException $ex) {
   $error_message = $ex->getMessage();
   $response = array();
   $response['status'] = 'failed';
