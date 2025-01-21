@@ -9,10 +9,14 @@ class Exception_log {
   }
 
   function log_exception() {
-    $date = date('m.d.Y h:i:s');
-    $error_log = $date."| User Error |". $this->error_message."\n";
-    define('USER_ERROR_LOG', __DIR__."\\logs\\".date('mdy').".log");
-    error_log($error_log, 3, USER_ERROR_LOG);
+    try {    $date = date('m.d.Y h:i:s');
+      $error_log = $date."| User Error |". $this->error_message."\n";
+      define('USER_ERROR_LOG', __DIR__."\\logs\\".date('mdy').".log");
+      error_log($error_log, 3, USER_ERROR_LOG);
+    } catch (Exception $e) {
+      print $e->getMessage();
+    }
+
   }
 
   function send_errorlogfile() {
